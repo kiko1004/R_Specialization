@@ -1,0 +1,37 @@
+---
+title: 'Case study 2: assignment, part I'
+author: "Kiril Spiridonov"
+date: "5/12/2020"
+output:
+  html_document: default
+  word_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, results = 'asis')
+```
+  
+
+# Is there significant correlation between the PM variable and any of the meteorological indicators?
+  
+```{r}
+st9572A <- read.csv("st9572A.csv")
+st9572A <- st9572A[,-1]
+library(corrplot)
+M<-cor(st9572A[,-1])
+corrplot(M, method="pie")
+```
+  
+No, there is not really any strong correlation.  
+
+# Is there significant correlation across pairs of meteorological indicators?
+  
+Yes, there is significant correlation between temperature and humidity (TAS and DP). This can be clearely observed on the graph. The exact values are:
+  
+```{r}
+I = cor(st9572A[,c(3:8)])
+corrplot(I, method="number")
+```
+
+
